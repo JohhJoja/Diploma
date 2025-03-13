@@ -10,8 +10,9 @@ class Buttom extends JButton implements ActionListener {
 
     JTextField log;
     JTextField pass;
+    LoginFrame FRAME;
 
-    public Buttom(String text, JTextField log, JTextField pass, int y){
+    public Buttom(String text, JTextField log, JTextField pass, int y, LoginFrame FRAME){
         super(text); // Устанавливаем текст кнопки
         setFocusPainted(false); // Убираем рамку фокуса
         setContentAreaFilled(false); // Убираем стандартную заливку
@@ -25,15 +26,14 @@ class Buttom extends JButton implements ActionListener {
 
         this.log = log;
         this.pass = pass;
+        this.FRAME = FRAME;
     }
 
     @Override
     protected void paintBorder(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        // Чёрный контур кнопки
         g2.setColor(Color.BLACK);
-        // Радиус скругления углов
         int arcSize = 38;
         g2.draw(new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, arcSize, arcSize));
         g2.dispose();
@@ -44,9 +44,12 @@ class Buttom extends JButton implements ActionListener {
         if (e.getSource()==this){
             String login = log.getText();
             String password = pass.getText();
-            int hash = login.hashCode();
+            int hash = login.hashCode() + password.hashCode();
 
-            System.out.println(login +" "+password+" "+hash);
+            System.out.println(hash);
+
+            // Создаем объект DatabaseManager и передаем ему необходимые параметры
+            new DatabaseManager(login, password, hash, FRAME);
 
             log.setText("");
             pass.setText("");

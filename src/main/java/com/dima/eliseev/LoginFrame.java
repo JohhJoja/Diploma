@@ -5,7 +5,9 @@ import java.awt.*;
 
 public class LoginFrame extends JFrame {
 
-    String backgroundImgPath = "E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\background_image.png";
+    private static JLabel label;
+    Auth_TextField LoginField;
+    Auth_TextField PasswordField;
 
     public LoginFrame() {
         setTitle("Login");
@@ -21,20 +23,21 @@ public class LoginFrame extends JFrame {
         setLayout(null);
 
         // Создаём текстовое поле
-        Auth_TextField LoginField = new Auth_TextField( "USERNAME",7, 194);
-        Auth_TextField PasswordField = new Auth_TextField("PASSWORD",7, 241);
+        LoginField = new Auth_TextField( "USERNAME",7, 194);
+        PasswordField = new Auth_TextField("PASSWORD",7, 241);
 
         add(LoginField);
         add(PasswordField);
 
         // Фон
-        JLabel label = new JLabel();
-        ImageIcon backgrIMG = new ImageIcon(backgroundImgPath);
-        label.setIcon(backgrIMG);
+        label = new JLabel();
+        //ImageIcon backgrIMG = new ImageIcon(backgroundImgPath);
+        isAuth(1);
+
         label.setBounds(0, 0, 495, 520);
         label.setOpaque(false); // Делаем фон прозрачным для компонентов поверх него
 
-        add(new Buttom("submit", LoginField, PasswordField, 299));
+        add(new Buttom("submit", LoginField, PasswordField, 299, this));
         add(label);
 
         setVisible(true);
@@ -42,5 +45,18 @@ public class LoginFrame extends JFrame {
 
     public static void main(String[] args) {
         new LoginFrame();
+    }
+    void isAuth(int i){
+        ImageIcon backgrIMG = null;
+        if (i==1){
+            backgrIMG = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\background_image.png");
+        } else if (i==2) {
+            backgrIMG = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\Tauth.png");
+            LoginField = null;
+            PasswordField = null;
+        } else {
+            backgrIMG = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\Fauth.png");
+        }
+        label.setIcon(backgrIMG);
     }
 }
