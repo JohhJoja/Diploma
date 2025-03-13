@@ -1,15 +1,13 @@
 package com.dima.eliseev;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 
 public class LoginFrame extends JFrame {
 
-    String backgraund_img_path = "E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\background_image.png";
+    String backgroundImgPath = "E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\background_image.png";
 
     public LoginFrame() {
-
         setTitle("Login");
         setSize(495, 520);
         setResizable(false);
@@ -20,35 +18,28 @@ public class LoginFrame extends JFrame {
         ImageIcon img = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\img.jpg");
         setIconImage(img.getImage());
 
-        // Отключаем стандартный LayoutManager
         setLayout(null);
+
+        // Создаём текстовое поле
+        Auth_TextField LoginField = new Auth_TextField( "USERNAME",7, 194);
+        Auth_TextField PasswordField = new Auth_TextField("PASSWORD",7, 241);
+
+        add(LoginField);
+        add(PasswordField);
 
         // Фон
         JLabel label = new JLabel();
-        ImageIcon backgrIMG = new ImageIcon(backgraund_img_path);
+        ImageIcon backgrIMG = new ImageIcon(backgroundImgPath);
         label.setIcon(backgrIMG);
-        label.setBounds(0, 0, 495, 520); // Указываем размер фона
+        label.setBounds(0, 0, 495, 520);
+        label.setOpaque(false); // Делаем фон прозрачным для компонентов поверх него
 
-        // Добавляем фон
-        add(label);
+        add(label); // Фон добавляем ПОСЛЕ текстового поля
 
         setVisible(true);
-
-        new Timer(5000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                isAuth(true);
-                label.setIcon(new ImageIcon(backgraund_img_path)); // Меняем фон
-            }
-        }).start();
     }
 
-    private void isAuth(boolean A){
-        if (A){
-            backgraund_img_path = "E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\Tauth.png";
-        } else{
-            backgraund_img_path = "E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\Fauth.png";
-        }
+    public static void main(String[] args) {
+        new LoginFrame();
     }
-
 }
