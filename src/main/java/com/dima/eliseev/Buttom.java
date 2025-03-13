@@ -4,14 +4,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import java.sql.SQLException;
 
 class Buttom extends JButton implements ActionListener {
 
-    private int arcSize = 38; // Радиус скругления углов
     JTextField log;
     JTextField pass;
 
-    public Buttom(String text, JTextField log, JTextField pass, int y) {
+    public Buttom(String text, JTextField log, JTextField pass, int y){
         super(text); // Устанавливаем текст кнопки
         setFocusPainted(false); // Убираем рамку фокуса
         setContentAreaFilled(false); // Убираем стандартную заливку
@@ -33,16 +33,21 @@ class Buttom extends JButton implements ActionListener {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // Чёрный контур кнопки
         g2.setColor(Color.BLACK);
+        // Радиус скругления углов
+        int arcSize = 38;
         g2.draw(new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, arcSize, arcSize));
         g2.dispose();
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==this){
-            System.out.println(log.getText());
-            System.out.println(pass.getText());
+            String login = log.getText();
+            String password = pass.getText();
+            int hash = login.hashCode();
+
+            System.out.println(login +" "+password+" "+hash);
+
             log.setText("");
             pass.setText("");
         }
