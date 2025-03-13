@@ -34,7 +34,8 @@ public class LoginFrame extends JFrame {
         label.setBounds(0, 0, 495, 520);
         label.setOpaque(false); // Делаем фон прозрачным для компонентов поверх него
 
-        add(label); // Фон добавляем ПОСЛЕ текстового поля
+        add(new Buttom("submit", LoginField, PasswordField, 299));
+        add(label);
 
         setVisible(true);
     }
