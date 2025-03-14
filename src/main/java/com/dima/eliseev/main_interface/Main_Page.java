@@ -13,7 +13,7 @@ public class Main_Page extends JFrame {
     private JTextField searchField;
 
     public Main_Page() {
-        setTitle("Адаптивный Фрейм");
+        setTitle("Фрейм");
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Разворачиваем на весь экран
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -26,7 +26,7 @@ public class Main_Page extends JFrame {
 
         // Основной контейнер (левый и правый блоки)
         JSplitPane mainSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-        mainSplitPane.setResizeWeight(0.3); // Левый блок занимает 30% ширины
+        mainSplitPane.setResizeWeight(0.2); // Левый блок занимает 30% ширины
 
         // Левый список (можно кликать)
         leftListModel = new DefaultListModel<>();
@@ -60,6 +60,7 @@ public class Main_Page extends JFrame {
         for (int i = 1; i <= 10; i++) {
             rightListModel.addElement("Запись " + i + " | Поле 1: X | Поле 2: Y");
         }
+        /// ////////////////////
         rightList = new JList<>(rightListModel);
         JScrollPane rightScrollPane = new JScrollPane(rightList);
 
@@ -99,4 +100,5 @@ public class Main_Page extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Main_Page::new);
     }
+
 }
