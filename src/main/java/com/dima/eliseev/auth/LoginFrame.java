@@ -1,13 +1,17 @@
 package com.dima.eliseev.auth;
 
+import com.dima.eliseev.main_interface.Main_Page;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame {
-
     private static JLabel label;
-    Auth_TextField LoginField;
-    Auth_TextField PasswordField;
-    Buttom SubButt;
+    private Auth_TextField LoginField;
+    private Auth_TextField PasswordField;
+    private Buttom SubButt;
+    private Timer closeTimer; // Добавляем переменную для таймера
 
     public LoginFrame() {
         setTitle("Login");
@@ -16,15 +20,11 @@ public class LoginFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Устанавливаем иконку окна
-        ImageIcon img = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\images\\img.jpg");
-        setIconImage(img.getImage());
-
         setLayout(null);
 
         // Создаём текстовое поле
-        LoginField = new Auth_TextField( "USERNAME",7, 194);
-        PasswordField = new Auth_TextField("PASSWORD",7, 241);
+        LoginField = new Auth_TextField("USERNAME", 7, 194);
+        PasswordField = new Auth_TextField("PASSWORD", 7, 241);
         SubButt = new Buttom("submit", LoginField, PasswordField, 299, this);
 
         add(LoginField);
@@ -33,7 +33,6 @@ public class LoginFrame extends JFrame {
 
         // Фон
         label = new JLabel();
-        //ImageIcon backgrIMG = new ImageIcon(backgroundImgPath);
         isAuth(1);
 
         label.setBounds(0, 0, 495, 520);
@@ -47,6 +46,7 @@ public class LoginFrame extends JFrame {
     public static void main(String[] args) {
         new LoginFrame();
     }
+
     void isAuth(int i) {
         ImageIcon backgrIMG = null;
         if (i == 1) {
@@ -58,17 +58,30 @@ public class LoginFrame extends JFrame {
             remove(LoginField);
             remove(PasswordField);
             remove(SubButt);
-            // Очищаем переменные
+
             LoginField = null;
             PasswordField = null;
-            new Timer(2000, e -> {
-                dispose(); // Закрытие окна через 2 секунды
-            }).start();
+            SubButt = null;
+
+            // Проверяем, запущен ли уже таймер
+            if (closeTimer == null || !closeTimer.isRunning()) {
+                closeTimer = new Timer(2000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        dispose(); // Закрываем окно
+                        new Main_Page(); // Открываем главное окно
+                        closeTimer.stop(); // Останавливаем таймер
+                    }
+                });
+                closeTimer.setRepeats(false); // Таймер сработает только один раз
+                closeTimer.start();
+            }
+
         } else {
             backgrIMG = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\images\\Fauth.png");
         }
         label.setIcon(backgrIMG);
-        revalidate(); // Обновляем контейнер после удаления компонентов
-        repaint();    // Перерисовываем окно
+        revalidate();
+        repaint();
     }
 }

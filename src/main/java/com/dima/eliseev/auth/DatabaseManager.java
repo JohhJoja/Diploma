@@ -23,25 +23,25 @@ public class DatabaseManager {
     }
 
     public boolean checkUserCredentials(String login, String password, int hash) {
-        String query = "SELECT login, passwordd, hesh FROM log_pass WHERE login = ? AND passwordd = ? AND hesh = ?";
+        String query = "SELECT login, passwordd FROM log_pass WHERE hesh = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, login);   // Устанавливаем login
-            preparedStatement.setString(2, password); // Устанавливаем password
-            preparedStatement.setInt(3, hash);        // Устанавливаем hash
+            preparedStatement.setInt(1, hash); // Сначала ищем по хэшу
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    System.out.println("Логин: " + resultSet.getString("login") +
-                            ", Пароль: " + resultSet.getString("passwordd") +
-                            ", Хеш: " + resultSet.getString("hesh"));
-                    frame.isAuth(2); // Меняем фон на "успешный вход"
-                    return true;
-                } else {
-                    System.out.println("Пользователь не найден.");
-                    frame.isAuth(3); // Меняем фон на "неудачный вход"
-                    return false;
+                while (resultSet.next()) {
+                    String dbLogin = resultSet.getString("login");
+                    String dbPassword = resultSet.getString("passwordd");
+
+                    if (dbLogin.equals(login) && dbPassword.equals(password)) {
+                        System.out.println("Успешный вход: " + dbLogin);
+                        frame.isAuth(2); // Меняем фон на "успешный вход"
+                        return true;
+                    }
                 }
+                System.out.println("Пользователь не найден или данные неверны.");
+                frame.isAuth(3); // Меняем фон на "неудачный вход"
+                return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -49,6 +49,7 @@ public class DatabaseManager {
         }
         return false;
     }
+
 
     public void closeConnection() {
         try {

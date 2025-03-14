@@ -6,6 +6,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.geom.RoundRectangle2D;
 
+import static com.dima.eliseev.css.CSS.CSS_Auth_TextField;
+
 class Auth_TextField extends JTextField {
     private int arcSize = 10; // Радиус скругления углов
     private String placeholder; // Текст плейсхолдера
@@ -13,23 +15,7 @@ class Auth_TextField extends JTextField {
     public Auth_TextField(String placeholder, int columns, int y) {
         super(columns);
         this.placeholder = placeholder;
-
-        setOpaque(false); // Отключаем стандартную заливку
-        setMargin(new Insets(0, 10, 0, 0)); // Отступ слева на 10 пикселей
-        setBounds(125, y, 245, 33);
-
-        // Добавляем слушатель фокуса для обработки плейсхолдера
-        addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                repaint(); // Перерисовываем поле при фокусе
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                repaint(); // Перерисовываем поле при потере фокуса
-            }
-        });
+        CSS_Auth_TextField(this,y);
     }
 
     @Override

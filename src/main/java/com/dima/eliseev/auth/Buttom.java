@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 
+import static com.dima.eliseev.css.CSS.CSS_Buttom;
+
 class Buttom extends JButton implements ActionListener {
 
     JTextField log;
@@ -14,16 +16,7 @@ class Buttom extends JButton implements ActionListener {
 
     public Buttom(String text, JTextField log, JTextField pass, int y, LoginFrame FRAME){
         super(text); // Устанавливаем текст кнопки
-        setFocusPainted(false); // Убираем рамку фокуса
-        setContentAreaFilled(false); // Убираем стандартную заливку
-        setBorderPainted(false); // Убираем стандартную границу
-        setOpaque(false); // Отключаем непрозрачность
-        setFont(new Font("Arial", Font.BOLD, 14)); // Шрифт
-        setForeground(Color.WHITE); // Цвет текста
-        setBounds(167, y, 149, 40); // Размещение кнопки
-        setBackground(new Color(0x0C2F54));
-        addActionListener(this);
-
+        CSS_Buttom(this, y);
         this.log = log;
         this.pass = pass;
         this.FRAME = FRAME;
@@ -45,8 +38,6 @@ class Buttom extends JButton implements ActionListener {
             String login = log.getText();
             String password = pass.getText();
             int hash = login.hashCode() + password.hashCode();
-
-            System.out.println(hash);
 
             // Создаем объект DatabaseManager и передаем ему необходимые параметры
             new DatabaseManager(login, password, hash, FRAME);
