@@ -1,7 +1,6 @@
-package com.dima.eliseev;
+package com.dima.eliseev.auth;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class LoginFrame extends JFrame {
 
@@ -18,7 +17,7 @@ public class LoginFrame extends JFrame {
         setLocationRelativeTo(null);
 
         // Устанавливаем иконку окна
-        ImageIcon img = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\img.jpg");
+        ImageIcon img = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\images\\img.jpg");
         setIconImage(img.getImage());
 
         setLayout(null);
@@ -51,9 +50,9 @@ public class LoginFrame extends JFrame {
     void isAuth(int i) {
         ImageIcon backgrIMG = null;
         if (i == 1) {
-            backgrIMG = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\background_image.png");
+            backgrIMG = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\images\\background_image.png");
         } else if (i == 2) {
-            backgrIMG = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\Tauth.png");
+            backgrIMG = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\images\\Tauth.png");
 
             // Удаляем текстовые поля, чтобы они больше не отображались
             remove(LoginField);
@@ -62,16 +61,14 @@ public class LoginFrame extends JFrame {
             // Очищаем переменные
             LoginField = null;
             PasswordField = null;
-//            try {
-//                Thread.sleep(5000); // Задержка на 2 секунды
-//            } catch (InterruptedException e) {e.printStackTrace();}
-//            dispose();
+            new Timer(2000, e -> {
+                dispose(); // Закрытие окна через 2 секунды
+            }).start();
         } else {
-            backgrIMG = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\Fauth.png");
+            backgrIMG = new ImageIcon("E:\\Java\\deeplomka\\OHPTIIFVOD\\src\\main\\java\\com\\dima\\eliseev\\images\\Fauth.png");
         }
         label.setIcon(backgrIMG);
         revalidate(); // Обновляем контейнер после удаления компонентов
         repaint();    // Перерисовываем окно
     }
-
 }

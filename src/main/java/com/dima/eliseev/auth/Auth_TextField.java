@@ -1,4 +1,4 @@
-package com.dima.eliseev;
+package com.dima.eliseev.auth;
 
 import javax.swing.*;
 import java.awt.*;

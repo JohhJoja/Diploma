@@ -1,6 +1,6 @@
 package com.dima.eliseev;
 
-import javax.swing.*;
+import com.dima.eliseev.auth.LoginFrame;
 
 public class Main {
     public static void main(String[] args) {
