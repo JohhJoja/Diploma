@@ -20,6 +20,12 @@ public class CSS {
         frame.setIconImage(img.getImage());
 
         frame.setLayout(null);
+//        String login = "", password = "d";
+//
+//        String query = "SELECT login, passwordd FROM log_pass WHERE login = '"
+//                       + login + "' AND passwordd = '" + password + "'";
+//
+//        query.toLowerCase();
     }
 
     public static void CSS_Buttom(JButton button, int y){
