@@ -50,7 +50,6 @@ public class DatabaseManager {
         return false;
     }
 
-
     public void closeConnection() {
         try {
             if (connection != null) {
