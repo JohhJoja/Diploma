@@ -22,10 +22,12 @@ public class LoginFrame extends JFrame {
 
         setLayout(null);
 
-        // Создаём текстовое поле
+        // Создаём текстовое поле и кнопку
         LoginField = new Auth_TextField("USERNAME", 7, 194);
         PasswordField = new Auth_TextField("PASSWORD", 7, 241);
         SubButt = new Buttom("submit", LoginField, PasswordField, 299, this);
+
+        PasswordField.SetClick(SubButt);
 
         add(LoginField);
         add(PasswordField);
