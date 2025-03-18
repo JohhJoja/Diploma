@@ -38,7 +38,9 @@ class Buttom extends JButton implements ActionListener {
         if (e.getSource()==this){
             String login = log.getText();
             String password = pass.getText();
+            System.out.println(hashPassword(password));
             int hash = login.hashCode() + password.hashCode();
+            System.out.println(hash);
 
             // Создаем объект DatabaseManager и передаем ему необходимые параметры
             new DatabaseManager(login, password, hash, FRAME);
