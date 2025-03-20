@@ -1,17 +1,14 @@
 package com.dima.eliseev.auth;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
-
 import static com.dima.eliseev.css.CSS.CSS_Auth_TextField;
 
 class Auth_TextField extends JTextField {
     private int arcSize = 10; // Радиус скругления углов
     private String placeholder; // Текст плейсхолдера
-//    Buttom button;
 
     public Auth_TextField(String placeholder, int columns, int y) {
         super(columns);
@@ -29,8 +26,6 @@ class Auth_TextField extends JTextField {
             }
         });
     }
-
-
 
     @Override
     protected void paintComponent(Graphics g) {

@@ -1,7 +1,5 @@
 package com.dima.eliseev.auth;
-
 import com.dima.eliseev.main_interface.Main_Page;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

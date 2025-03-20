@@ -78,6 +78,7 @@ public class DatabaseManager {
             for (byte b : hashBytes) {
                 hexString.append(String.format("%02x", b));
             }
+            System.out.println("Dimasik");
             return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Ошибка хеширования пароля", e);
