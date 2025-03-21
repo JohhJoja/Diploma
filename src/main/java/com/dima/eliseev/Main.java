@@ -9,7 +9,8 @@ public class Main {
         //new LoginFrame();
 
         Multithread my_firstThread = new Multithread();
+        Multithread my_secondThread = new Multithread();
         my_firstThread.start();
-
+        my_secondThread.start();
     }
 }
