@@ -1,4 +1,4 @@
-package com.dima.eliseev.main_interface;
+package com.dima.eliseev.threads;
 
 public class Multithread extends Thread{
 
